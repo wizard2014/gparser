@@ -1,2 +1,6 @@
-# gparser
-Parse email from Gmail
+GParser
+=======================
+
+Introduction
+------------
+This is a simple module to get email list.

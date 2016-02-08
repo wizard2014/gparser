@@ -1,0 +1,34 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($this->translate('Gmail Parser'))->setSeparator(' - ')->setAutoEscape(false); ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ; ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet('//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+        ; ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile('//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+            ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+            ->prependFile('//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js',  'text/javascript', ['conditional' => 'lt IE 9',])
+            ->prependFile('//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js', 'text/javascript', ['conditional' => 'lt IE 9',])
+        ; ?>
+
+    </head>
+    <body>
+        <div class="container">
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

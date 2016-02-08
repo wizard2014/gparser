@@ -1,0 +1,94 @@
+<div class="row">
+    <h1>Take it!</h1>
+
+    <div class="col col-md-12">
+
+        <form class="form-inline form">
+            <div class="form-group">
+                <label class="sr-only" for="email">Email:</label>
+                <input type="email" class="form-control email" id="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="password">Password:</label>
+                <input type="password" class="form-control password" id="password" placeholder="Password" autocomplete="off">
+            </div>
+            <button class="btn btn-primary go">Go!</button>
+        </form>
+
+        <hr>
+    </div>
+
+    <!-- Result here -->
+    <div class="col col-md-12">
+        <div class="result">
+            <table class="table table-striped hide">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Date/Time</th>
+                </tr>
+                </thead>
+                <tbody><!-- Data here --></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        $('.form').on('submit', function(e) {
+            e.preventDefault();
+
+            var email    = $(this).find('.email'),
+                password = $(this).find('.password'),
+                btn      = $(this).find('.go'),
+                table    = $('.table');
+
+            if (email.val() === '' || password.val() === '') {
+                return false;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url : '/application',
+                data: { email: email.val(), password: password.val() },
+
+                beforeSend: function() {
+                    table.addClass('hide');
+                    table.find('tbody').children().remove();
+                    btn.prop('disabled', true);
+                }
+            })
+            .done(function(data) {
+                var emails = data.emails;
+
+                if (emails.length > 0) {
+                    var html = '';
+
+                    $.each(emails, function(index, value) {
+                        html += '\
+                                    <tr>\
+                                        <td>' + value[0] + '</td>\
+                                        <td>' + value[1] + '</td>\
+                                        <td>' + value[2] + '</td>\
+                                    </tr>';
+                    });
+
+                    table.find('tbody').append(html);
+                }
+
+                // reset val
+                email.val('');
+                password.val('');
+                table.removeClass('hide');
+            })
+            .fail(function() {
+
+            })
+            .always(function() {
+                btn.prop('disabled', false);
+            });
+        });
+    })();
+</script>
