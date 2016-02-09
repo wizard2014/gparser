@@ -76,12 +76,12 @@
                     });
 
                     table.find('tbody').append(html);
+                    table.removeClass('hide');
                 }
 
                 // reset val
                 email.val('');
                 password.val('');
-                table.removeClass('hide');
             })
             .fail(function() {
 
