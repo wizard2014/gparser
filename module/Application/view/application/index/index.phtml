@@ -40,9 +40,11 @@
         $('.form').on('submit', function(e) {
             e.preventDefault();
 
-            var email    = $(this).find('.email'),
-                password = $(this).find('.password'),
-                btn      = $(this).find('.go'),
+            var $this = $(this);
+
+            var email    = $this.find('.email'),
+                password = $this.find('.password'),
+                btn      = $this.find('.go'),
                 table    = $('.table');
 
             if (email.val() === '' || password.val() === '') {
